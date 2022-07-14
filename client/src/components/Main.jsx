@@ -1,5 +1,10 @@
+import LoginRegister from "./LoginRegister";
+import { Container } from 'react-bootstrap';
+
 export default function Main() {
     return(
-        <div>hi</div>
+        <Container>
+            <LoginRegister/>
+        </Container>
     );
 }

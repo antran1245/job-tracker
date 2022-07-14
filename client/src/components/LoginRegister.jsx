@@ -1,11 +1,12 @@
-import {Container, Row, Col, Form} from 'react-bootstrap';
+import { Row, Col, Form, Button} from 'react-bootstrap';
+import "../sass/loginRegister.scss";
 
 export default function LoginRegister() {
     return (
-        <Container>
-            <Row>
-                <Col xs={12} lg={6}>
-                    <Form className='box'>
+        <>
+            <Row id='loginRegister'>
+                <Col sm={5}>
+                    <Form>
                         <h2>Log In</h2>
                         <Form.Group className='mb-3'>
                             <Form.Label>Email Address:</Form.Label>
@@ -18,8 +19,8 @@ export default function LoginRegister() {
                         <Button variant='primary' type='submit'>Submit</Button>
                     </Form>
                 </Col>
-                <Col>
-                    <Form className='box'>
+                <Col sm={{offset: 1, span: 5}} className="mt-3 mt-sm-0">
+                    <Form>
                         <h2>Sign Up</h2>
                         <Form.Group className='mb-3'>
                             <Form.Label>Username</Form.Label>
@@ -41,6 +42,6 @@ export default function LoginRegister() {
                     </Form>
                 </Col>
             </Row>
-        </Container>
+        </>
     )
 }

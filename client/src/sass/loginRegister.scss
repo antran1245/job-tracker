@@ -1,0 +1,21 @@
+.vertical {
+    display: flex;
+    justify-content: center;
+    span {
+        border-left: 1px solid rgb(3, 3, 3);
+    }
+}
+
+#loginRegister {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    form {
+        background-color: #394867;
+        padding: 20px;
+        border-radius: 10px;
+        color: whitesmoke;
+        height: 500px;
+        box-shadow: 0px 0px 20px black, inset 0 0 10px black;
+    }
+}
