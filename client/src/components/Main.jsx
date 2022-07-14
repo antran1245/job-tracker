@@ -1,12 +1,20 @@
+import { BrowserRouter, Routes, Route} from "react-router-dom";
 import { Container } from 'react-bootstrap';
+import "../sass/main.scss";
 import LoginRegister from "./LoginRegister";
 import Navigation from "./Navigation";
+import Home from "./Home";
 
 export default function Main() {
     return(
-        <Container fluid className='p-0'>
-            <Navigation />
-            <LoginRegister />
+        <Container fluid className='p-0 main'>
+            <BrowserRouter>
+                <Navigation />
+                <Routes>
+                    <Route index element={<Home/>} />
+                    <Route path="login" element={<LoginRegister />} />
+                </Routes>
+            </BrowserRouter>
         </Container>
     );
 }

@@ -1,6 +1,14 @@
 #loginRegister {
-    display: flex;
-    align-items: center;
+    > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        > div {
+            height: 550px;
+            display: flex;
+            align-items: center;
+        }
+    }
     form {
         background-color: #394867;
         padding: 20px;

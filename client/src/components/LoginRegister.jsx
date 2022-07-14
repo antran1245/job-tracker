@@ -3,10 +3,10 @@ import "../sass/loginRegister.scss";
 
 export default function LoginRegister() {
     return (
-        <Container>
-            <Row id='loginRegister' className='mt-5'>
+        <Container id='loginRegister'>
+            <Row>
                 <Col sm={5}>
-                    <Form>
+                    <Form className='w-100'>
                         <h2>Log In</h2>
                         <Form.Group className='mb-3'>
                             <Form.Label>Email Address:</Form.Label>
@@ -20,7 +20,7 @@ export default function LoginRegister() {
                     </Form>
                 </Col>
                 <Col sm={{offset: 1, span: 5}} className="mt-3 mt-sm-0">
-                    <Form>
+                    <Form className='w-100'>
                         <h2>Sign Up</h2>
                         <Form.Group className='mb-3'>
                             <Form.Label>Username</Form.Label>
