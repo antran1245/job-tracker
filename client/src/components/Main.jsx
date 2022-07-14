@@ -1,10 +1,12 @@
-import LoginRegister from "./LoginRegister";
 import { Container } from 'react-bootstrap';
+import LoginRegister from "./LoginRegister";
+import Navigation from "./Navigation";
 
 export default function Main() {
     return(
-        <Container>
-            <LoginRegister/>
+        <Container fluid className='p-0'>
+            <Navigation />
+            <LoginRegister />
         </Container>
     );
 }

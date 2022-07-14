@@ -1,10 +1,10 @@
-import { Row, Col, Form, Button} from 'react-bootstrap';
+import { Container, Row, Col, Form, Button} from 'react-bootstrap';
 import "../sass/loginRegister.scss";
 
 export default function LoginRegister() {
     return (
-        <>
-            <Row id='loginRegister'>
+        <Container>
+            <Row id='loginRegister' className='mt-5'>
                 <Col sm={5}>
                     <Form>
                         <h2>Log In</h2>
@@ -42,6 +42,6 @@ export default function LoginRegister() {
                     </Form>
                 </Col>
             </Row>
-        </>
+        </Container>
     )
 }
