@@ -6,13 +6,17 @@ const JobSchema = new mongoose.Schema({
         required: [true, "Job Title is required"]
     },
     position: {
-        type: String
+        type: String,
+        required: [true, "Position is required"]
     },
     appliedDate: {
-        type: Date
+        type: Date,
+        required: [true, "Date is required"]
     },
     status: {
-        type: String
+        type: String,
+        default: "applied",
+        enum: ['applied', 'interview', 'rejected']
     }
 }, {timestamps: true})
 
