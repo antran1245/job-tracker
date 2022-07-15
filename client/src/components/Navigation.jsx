@@ -11,6 +11,7 @@ export default function Navigation() {
                 <Navbar.Collapse id='toggler-navbar'>
                     <Nav className='ms-auto'>
                         <Link className='me-3' to="/">Home</Link>
+                        <Link className='me-3' to="record">Record</Link>
                         <Link to="login">Login / Sign Up</Link>
                     </Nav>
                 </Navbar.Collapse>
