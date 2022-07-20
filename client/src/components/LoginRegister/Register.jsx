@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function Register() {
+    const navigate = useNavigate();
     const [form, setForm] = useState({
         username: "",
         email: "",
@@ -11,9 +13,12 @@ export default function Register() {
     })
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8000/api/user/register', form, {'withCredentials': true})
-        .then(resp => console.log(resp.data))
-        .catch(err => console.log("Error: ", err))
+
+        //================== Working ======================
+        // axios.post('http://localhost:8000/api/user/register', form, {'withCredentials': true})
+        // .then(resp => console.log(resp.data))
+        // .catch(err => console.log("Error: ", err))
+        navigate("/", {replace: true})
     }
     return(
         <Form className='w-100' onSubmit={handleSubmit}>
