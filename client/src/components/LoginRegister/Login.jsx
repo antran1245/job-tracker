@@ -13,13 +13,15 @@ export default function Login() {
         e.preventDefault()
 
         axios.post("http://localhost:8000/api/user/login", form, {'withCredentials': true})
-        .then(resp => console.log(resp.data))
+        .then(resp => {
+            console.log(resp.data)
+            navigate("/", {replace: true})
+        })
         .catch(err => console.log("Error: ", err))
 
-        navigate("/", {replace: true})
     }
     return(
-        <Form className='w-100'>
+        <Form className='w-100' onSubmit={handleSubmit}>
             <h2>Log In</h2>
             <Form.Group className='mb-3'>
                 <Form.Label>Email Address:</Form.Label>
