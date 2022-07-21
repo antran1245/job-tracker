@@ -1,16 +1,8 @@
-import { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Paper from '../svg/Paper';
-import axios from 'axios';
 import '../sass/home.scss';
 
 export default function Home() {
-    // let [user, setUser] = useState(false)
-    useEffect(() => {
-        axios.get('http://localhost:8000/api/user', {'withCredentials':true})
-        .then(resp => console.log(resp.data))
-        .catch(err => console.log(err))
-    }, [])
     return(
         <Container>
             <Row>
