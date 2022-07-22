@@ -1,8 +1,17 @@
-import { Container, Navbar, Nav } from 'react-bootstrap';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { Container, Navbar, Nav } from 'react-bootstrap';
+import { UserContext } from '../context/UserContext';
 import '../sass/navigation.scss';
+import axios from 'axios';
 
 export default function Navigation() {
+    const {user, setUser} = useContext(UserContext);
+
+    const logout = () => {
+        axios.get('http://localhost:8000/api/user/logout', {'withCredentials': true});
+        setUser({_id: "", username: ""})
+    }
     return(
         <Navbar id='navigation' expand='md'>
             <Container>
@@ -12,7 +21,8 @@ export default function Navigation() {
                     <Nav className='ms-auto'>
                         <Link className='me-3' to="/">Home</Link>
                         <Link className='me-3' to="record">Record</Link>
-                        <Link to="login">Login / Sign Up</Link>
+                        {user._id === ""?
+                            <Link to="login">Login / Sign Up</Link> : <Link to="" onClick={logout}>Logout</Link>}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

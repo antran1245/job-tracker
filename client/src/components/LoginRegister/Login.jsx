@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/UserContext';
 import axios from 'axios';
 
 export default function Login() {
-    let navigate = useNavigate()
+    const navigate = useNavigate()
+    const { user, setUser } = useContext(UserContext);
     const [form, setForm] = useState({
         email: "",
         password: ""
@@ -15,6 +17,7 @@ export default function Login() {
         axios.post("http://localhost:8000/api/user/login", form, {'withCredentials': true})
         .then(resp => {
             console.log(resp.data)
+            setUser({_id: resp.data.user._id, username: resp.data.user.username})
             navigate("/", {replace: true})
         })
         .catch(err => console.log("Error: ", err))

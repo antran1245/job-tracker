@@ -10,10 +10,15 @@ import RecordForm from "./RecordForm";
 import "../sass/main.scss";
 
 export default function Main() {
-    let [user, setUser] = useState(false)
+    let [user, setUser] = useState({_id: "", username: ""})
     useEffect(() => {
         axios.get('http://localhost:8000/api/user', {'withCredentials':true})
-        .then(resp => console.log(resp.data))
+        .then(resp => {
+            setUser({
+                _id: resp.data.user._id,
+                username: resp.data.user.username
+            })
+            console.log(resp.data)})
         .catch(err => console.log(err))
     }, [])
     return(
