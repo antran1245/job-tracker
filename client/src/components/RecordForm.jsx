@@ -4,11 +4,17 @@ import Paper from '../svg/Paper';
 export default function RecordForm() {
     return(
         <Container>
-            <h1>Record</h1>
             <Row>
                 <Col xs={{span: 12, order: 'last'}} md={{span:6, order: 'first'}}>
                     <Form>
-                        <h2>Job Detail</h2>
+                        <Row>
+                            <Col>
+                                <Paper size={100}/>
+                            </Col>
+                            <Col>
+                                <h2>Input Job Detail</h2>
+                            </Col>
+                        </Row>
                         <Form.Group className='mb-3'>
                             <Form.Label>Job Title</Form.Label>
                             <Form.Control type='text' />

@@ -3,6 +3,10 @@ form {
     padding: 15px 10px;
     color: white;
     border-radius: 10px;
+    .row {
+        display: flex;
+        align-items: flex-end;
+    }
 }
 
 .icon {
