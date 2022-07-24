@@ -1,6 +1,7 @@
 import {Container, Row, Col, Form, Button} from 'react-bootstrap';
 import "../sass/record.scss";
 import Paper from '../svg/Paper';
+
 export default function RecordForm() {
     return(
         <Container>

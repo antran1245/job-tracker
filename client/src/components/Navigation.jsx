@@ -4,6 +4,8 @@ import { Container, Navbar, Nav } from 'react-bootstrap';
 import { UserContext } from '../context/UserContext';
 import '../sass/navigation.scss';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserLarge } from '@fortawesome/free-solid-svg-icons';
 
 export default function Navigation() {
     const {user, setUser} = useContext(UserContext);
@@ -25,6 +27,11 @@ export default function Navigation() {
                             <Link to="login">Login / Sign Up</Link> : <Link to="" onClick={logout}>Logout</Link>}
                     </Nav>
                 </Navbar.Collapse>
+                <Nav className='ms-3'>
+                    <Link to="/profile">
+                        <FontAwesomeIcon icon={faUserLarge} className="fa-lg"/>
+                    </Link>
+                </Nav>
             </Container>
         </Navbar>
     )

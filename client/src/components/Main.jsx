@@ -8,6 +8,7 @@ import Navigation from "./Navigation";
 import Home from "./Home";
 import RecordForm from "./RecordForm";
 import "../sass/main.scss";
+import ProfilePage from "./ProfilePage";
 
 export default function Main() {
     let [user, setUser] = useState({_id: "", username: ""})
@@ -30,6 +31,7 @@ export default function Main() {
                     <Route index element={<Home/>} />
                     <Route path="login" element={<LoginRegister />} />
                     <Route path="record" element={<RecordForm />}/>
+                    <Route path="profile" element={<ProfilePage/>}/>
                 </Routes>
             </BrowserRouter>
         </Container>
