@@ -20,6 +20,10 @@ export default function RecordForm() {
                             <Form.Label>Job Title</Form.Label>
                             <Form.Control type='text' />
                         </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Company</Form.Label>
+                            <Form.Control type='text'/>
+                        </Form.Group>
                         <Form.Group className='mb-3'>
                             <Form.Label>Position</Form.Label>
                             <Form.Control type='text'/>
