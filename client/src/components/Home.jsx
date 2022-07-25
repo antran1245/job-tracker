@@ -16,13 +16,22 @@ export default function Home() {
                 </Col>
             </Row>
             <Row>
-                Apply
+                <section>
+                    <h2>Applied</h2>
+                    <p>You just applied for a job. What now?</p>
+                </section>
             </Row>
             <Row>
-                Record
+                <section>
+                    <h2>Record</h2>
+                    <p>Come here and record down the job information.</p>
+                </section>
             </Row>
             <Row>
-                Track
+                <section>
+                    <h2>Update</h2>
+                    <p>Update the record as you get update from </p>
+                </section>
             </Row>
         </Container>
     );
