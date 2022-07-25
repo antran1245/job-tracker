@@ -5,9 +5,9 @@ import Paper from '../svg/Paper';
 export default function RecordForm() {
     return(
         <Container>
-            <Row>
+            <Row className='mt-3'>
                 <Col xs={{span: 12, order: 'last'}} md={{span:6, order: 'first'}}>
-                    <Form>
+                    <Form className='p-4'>
                         <Row>
                             <Col>
                                 <Paper size={100}/>
@@ -28,7 +28,7 @@ export default function RecordForm() {
                             <Form.Label>Applied Date</Form.Label>
                             <Form.Control type="text" />
                         </Form.Group>
-                        <Button variant='primary'>Submit</Button>
+                        <Button variant='primary' className='w-100'>Submit</Button>
                     </Form>
                 </Col>
                 <Col className='icon mb-3 mb-md-0' xs={{span: 12, order: 'first'}} md={{span: 6, order: 'last'}}>
