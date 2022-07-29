@@ -3,6 +3,7 @@ import {Container, Row, Col, Form, Button} from 'react-bootstrap';
 import "../sass/record.scss";
 import Paper from '../svg/Paper';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function RecordForm() {
     const [form, setForm] =  useState({
@@ -11,10 +12,14 @@ export default function RecordForm() {
         position: "",
         appliedDate:""
     })
+    const navigate = useNavigate()
     const handleSubmit =  (e) => {
         e.preventDefault()
         axios.post('http://localhost:8000/api/job/new', form, {'withCredentials': true})
-        .then(resp => console.log(resp))
+        .then(resp => {
+            navigate('/profile')
+            console.log(resp)
+        })
         .catch(err => console.log(err))
     }
     return(
