@@ -20,7 +20,13 @@ const UserSchema = new mongoose.Schema({
             validator: val => /^([\w-\.]+@([\w-]+\.)+[\w-]+)?$/.test(val),
             message: "Please enter a valid email"
         }
-    }
+    },
+    jobs: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Job"
+        }
+    ]
 }, {timestamps: true})
 
 UserSchema.pre('save', function(next) {

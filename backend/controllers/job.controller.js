@@ -1,9 +1,14 @@
 const Job = require('../models/job.model');
+const User = require('../models/user.model');
 
 module.exports.createRecord = (req, res) => {
     console.log(req.body)
     Job.create(req.body)
-    .then(resp => res.json(resp))
+    .then(resp => 
+        {
+            console.log(resp._id)
+            res.json(resp)
+        })
     .catch(err => res.json(err))
 }
 

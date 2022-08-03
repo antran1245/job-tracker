@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import {Container, Row, Col, Form, Button} from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
 import "../sass/record.scss";
 import Paper from '../svg/Paper';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 export default function RecordForm() {
+    const { user } = useContext(UserContext);
     const [form, setForm] =  useState({
         jobTitle: "",
         company: "",
@@ -15,7 +17,7 @@ export default function RecordForm() {
     const navigate = useNavigate()
     const handleSubmit =  (e) => {
         e.preventDefault()
-        axios.post('http://localhost:8000/api/job/new', form, {'withCredentials': true})
+        axios.post(`http://localhost:8000/api/job/new/:${user._id}`, form, {'withCredentials': true})
         .then(resp => {
             navigate('/profile')
             console.log(resp)

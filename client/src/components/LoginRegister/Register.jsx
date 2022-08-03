@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { UserContext } from '../../context/UserContext';
 
 export default function Register() {
+    const {setUser} = useContext(UserContext)
     const navigate = useNavigate();
     const [form, setForm] = useState({
         username: "",
@@ -13,11 +15,14 @@ export default function Register() {
     })
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        //================== Working ======================
-        // axios.post('http://localhost:8000/api/user/register', form, {'withCredentials': true})
-        // .then(resp => console.log(resp.data))
-        // .catch(err => console.log("Error: ", err))
+        axios.post('http://localhost:8000/api/user/register', form, {'withCredentials': true})
+        .then(resp => {
+            setUser({
+                _id: resp.data.user._id,
+                username: resp.data.user.username
+            })
+        })
+        .catch(err => console.log("Error: ", err))
         navigate("/", {replace: true})
     }
     return(

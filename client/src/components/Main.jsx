@@ -19,7 +19,7 @@ export default function Main() {
                 _id: resp.data.user._id,
                 username: resp.data.user.username
             })
-            console.log(resp.data)})
+        })
         .catch(err => console.log(err))
     }, [])
     return(
