@@ -17,7 +17,7 @@ export default function RecordForm() {
     const navigate = useNavigate()
     const handleSubmit =  (e) => {
         e.preventDefault()
-        axios.post(`http://localhost:8000/api/job/new/:${user._id}`, form, {'withCredentials': true})
+        axios.post(`http://localhost:8000/api/job/new/${user._id}`, form, {'withCredentials': true})
         .then(resp => {
             navigate('/profile')
             console.log(resp)

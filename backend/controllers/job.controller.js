@@ -2,12 +2,21 @@ const Job = require('../models/job.model');
 const User = require('../models/user.model');
 
 module.exports.createRecord = (req, res) => {
-    console.log(req.body)
+    // console.log(req.params._id)
     Job.create(req.body)
     .then(resp => 
         {
-            console.log(resp._id)
-            res.json(resp)
+            User.findByIdAndUpdate(
+                req.params._id,
+                {
+                    $push: {
+                        jobs: resp._id
+                    }
+                },
+                {new: true, useFindAndModify: false})
+            .then(() => res.json(resp))
+            .catch(err => res.json(err))
+            // res.json(resp)
         })
     .catch(err => res.json(err))
 }
