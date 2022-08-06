@@ -22,7 +22,7 @@ module.exports.createRecord = (req, res) => {
 }
 
 module.exports.allRecords = (req, res) => {
-    Job.find({})
+    Job.findById(req.params._id).populate("jobs")
     .then(resp => res.json(resp))
     .catch(err => res.json(err))
 }

@@ -17,7 +17,7 @@ module.exports.login = async(req, res) => {
             // A set of fields to include in the token
             const payload = {
                 _id: user._id,
-                username: user.username
+                name: user.name
             }
             // Generate the token
             const userToken = jwt.sign(payload, process.env.SECRET_KEY);
@@ -28,7 +28,7 @@ module.exports.login = async(req, res) => {
             })
 
             // response message to client
-            .json({message: 'ok', user: {_id: user.id, username: user.username}});
+            .json({message: 'ok', user: {_id: user.id, name: user.name}});
         } else {
             res.status(400).json({message: "Invalid Email/Password"})
         }
@@ -38,11 +38,11 @@ module.exports.login = async(req, res) => {
 }
 
 module.exports.register = async(req, res) => {
-    const {username, password, email} = req.body;
+    const {name, password, email} = req.body;
     try {
         // Create a user account to the mongoDB
         let user = await User.create({
-            username,
+            name,
             password,
             email
         })
@@ -50,14 +50,14 @@ module.exports.register = async(req, res) => {
         // A set of fields to include in the token
         const payload = {
             _id: user._id,
-            username: user.username,
+            name: user.name,
         }
         // Generate a token
         const userToken = jwt.sign(payload , process.env.SECRET_KEY)
         res.cookie('usertoken', userToken, process.env.SECRET_KEY, {
             httpOnly: true
         })
-        .json({message: "ok", user: {_id: user.id, username: user.username}})
+        .json({message: "ok", user: {_id: user.id, name: user.name}})
     } catch (err) {
         res.json(err)
     }
@@ -71,6 +71,6 @@ module.exports.logout = (req, res) => {
 module.exports.relogin = (req, res) => {
     const { _id } = res.locals.payload
     User.findOne({ _id: _id })
-    .then(user => res.json({message: "ok", user: { _id: user.id, username: user.username }}))
+    .then(user => res.json({message: "ok", user: { _id: user.id, name: user.name }}))
     .catch(err => res.json(err))
 }

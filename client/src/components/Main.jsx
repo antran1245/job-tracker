@@ -11,13 +11,13 @@ import "../sass/main.scss";
 import ProfilePage from "./ProfilePage";
 
 export default function Main() {
-    let [user, setUser] = useState({_id: "", username: ""})
+    let [user, setUser] = useState({_id: "", name: ""})
     useEffect(() => {
         axios.get('http://localhost:8000/api/user', {'withCredentials':true})
         .then(resp => {
             setUser({
                 _id: resp.data.user._id,
-                username: resp.data.user.username
+                name: resp.data.user.name
             })
         })
         .catch(err => console.log(err))

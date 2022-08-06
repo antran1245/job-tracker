@@ -8,7 +8,7 @@ export default function Register() {
     const {setUser} = useContext(UserContext)
     const navigate = useNavigate();
     const [form, setForm] = useState({
-        username: "",
+        name: "",
         email: "",
         password: "",
         confirm: ""
@@ -19,7 +19,7 @@ export default function Register() {
         .then(resp => {
             setUser({
                 _id: resp.data.user._id,
-                username: resp.data.user.username
+                name: resp.data.user.name
             })
         })
         .catch(err => console.log("Error: ", err))
@@ -29,11 +29,11 @@ export default function Register() {
         <Form className='w-100' onSubmit={handleSubmit}>
             <h2>Sign Up</h2>
             <Form.Group className='mb-3'>
-                <Form.Label>Username</Form.Label>
+                <Form.Label>Name</Form.Label>
                 <Form.Control 
                     type='text' 
-                    placeholder='Enter username' 
-                    onChange={(e) => setForm({...form, username: e.target.value})}
+                    placeholder='Enter name' 
+                    onChange={(e) => setForm({...form, name: e.target.value})}
                 />
             </Form.Group>
             <Form.Group className='mb-3'>

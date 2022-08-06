@@ -10,8 +10,22 @@ useEffect(() => {
     
 }, [])
     return(
-        <div>
-            Profile page
-        </div>
+        <>
+            <Row>
+                Hello, Name
+            </Row>
+            <Row>
+                Currently you have
+            </Row>
+            <Row>
+                applied
+            </Row>
+            <Row>
+                interviewed
+            </Row>
+            <Row>
+                denied
+            </Row>
+        </>
     );
 }

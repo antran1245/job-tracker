@@ -12,7 +12,7 @@ export default function Navigation() {
 
     const logout = () => {
         axios.get('http://localhost:8000/api/user/logout', {'withCredentials': true});
-        setUser({_id: "", username: ""})
+        setUser({_id: "", name: ""})
     }
     return(
         <Navbar id='navigation' expand='md'>

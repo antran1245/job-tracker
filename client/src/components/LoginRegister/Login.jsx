@@ -17,7 +17,7 @@ export default function Login() {
         axios.post("http://localhost:8000/api/user/login", form, {'withCredentials': true})
         .then(resp => {
             console.log(resp.data)
-            setUser({_id: resp.data.user._id, username: resp.data.user.username})
+            setUser({_id: resp.data.user._id, name: resp.data.user.name})
             navigate("/", {replace: true})
         })
         .catch(err => console.log("Error: ", err))
