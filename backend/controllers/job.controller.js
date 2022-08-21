@@ -22,8 +22,10 @@ module.exports.createRecord = (req, res) => {
 }
 
 module.exports.allRecords = (req, res) => {
-    Job.findById(req.params._id).populate("jobs")
-    .then(resp => res.json(resp))
+    const { _id } = req.params
+    User.findOne({_id:_id})
+    .populate("jobs")
+    .then(jobs => res.json(jobs))
     .catch(err => res.json(err))
 }
 
