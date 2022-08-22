@@ -11,7 +11,9 @@ const JobSchema = new mongoose.Schema({
     },
     position: {
         type: String,
-        required: [true, "Position is required"]
+    },
+    example: {
+        type: String
     },
     appliedDate: {
         type: Date,
