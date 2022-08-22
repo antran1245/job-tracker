@@ -1,4 +1,4 @@
-import { Row, Col, Container } from 'react-bootstrap';
+import { Row, Col, Container, Table } from 'react-bootstrap';
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
@@ -63,6 +63,35 @@ useEffect(() => {
                     <p>
                         Rejected
                     </p>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Job Title</th>
+                                <th>Company</th>
+                                <th>Position</th>
+                                <th>Applied Date:</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {listing.map((item, index) => {
+                                const date = new Date(item.appliedDate).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
+                                return (<tr key={index}>
+                                    <td>{index}</td>
+                                    <td>{item.jobTitle}</td>
+                                    <td>{item.company}</td>
+                                    <td>{item.position}</td>
+                                    <td>{date}</td>
+                                    <td>{item.status}</td>
+                                </tr>);
+                            })}
+                        </tbody>
+                    </Table>
                 </Col>
             </Row>
         </Container>
