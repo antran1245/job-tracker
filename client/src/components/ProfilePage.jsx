@@ -1,4 +1,4 @@
-import { Row, Col, Container, Table } from 'react-bootstrap';
+import { Row, Col, Container, Table, Button } from 'react-bootstrap';
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { UserContext } from '../context/UserContext';
@@ -40,7 +40,7 @@ useEffect(() => {
                 </Col>
             </Row>
             <Row id="amount" className='d-flex justify-content-center'>
-                <Col xs={12} sm={2} className='status'>
+                <Col xs={4} sm={2} className='status'>
                     <p>
                     &#10240; {status.applied.length}
                     </p>
@@ -48,7 +48,7 @@ useEffect(() => {
                         Applied
                     </p>
                 </Col>
-                <Col xs={12} sm={2} className='status'>
+                <Col xs={4} sm={2} className='status'>
                     <p>
                     &#10240; {status.interview.length}
                     </p>
@@ -56,13 +56,18 @@ useEffect(() => {
                         Interview
                     </p>
                 </Col>
-                <Col xs={12} sm={2} className='status'>
+                <Col xs={4} sm={2} className='status'>
                     <p>
                     &#10240; {status.rejected.length}
                     </p>
                     <p>
                         Rejected
                     </p>
+                </Col>
+            </Row>
+            <Row>
+                <Col className='d-flex justify-content-end mb-3'>
+                    <Button className="btn btn-primary">&#43; Another Job</Button>
                 </Col>
             </Row>
             <Row>
@@ -82,7 +87,7 @@ useEffect(() => {
                             {listing.map((item, index) => {
                                 const date = new Date(item.appliedDate).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
                                 return (<tr key={index}>
-                                    <td>{index}</td>
+                                    <td>{index+1}</td>
                                     <td>{item.jobTitle}</td>
                                     <td>{item.company}</td>
                                     <td>{item.position}</td>

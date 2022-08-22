@@ -21,13 +21,14 @@ export default function Navigation() {
                 <Navbar.Toggle aria-controls='toggler-navbar'/>
                 <Navbar.Collapse id='toggler-navbar'>
                     <Nav className='ms-auto'>
+                        <Link className='me-3 d-block d-sm-none' to="/profile">Account</Link>
                         <Link className='me-3' to="/">Home</Link>
                         <Link className='me-3' to="record">Record</Link>
                         {user._id === ""?
                             <Link to="login">Login / Sign Up</Link> : <Link to="" onClick={logout}>Logout</Link>}
                     </Nav>
                 </Navbar.Collapse>
-                <Nav className='ms-3'>
+                <Nav className='ms-3 d-none d-sm-block'>
                     <Link to="/profile">
                         <FontAwesomeIcon icon={faUserLarge} className="fa-lg"/>
                     </Link>
