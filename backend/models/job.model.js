@@ -12,7 +12,7 @@ const JobSchema = new mongoose.Schema({
     position: {
         type: String,
     },
-    example: {
+    experience: {
         type: String
     },
     appliedDate: {

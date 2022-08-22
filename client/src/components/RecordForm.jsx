@@ -12,6 +12,7 @@ export default function RecordForm() {
         jobTitle: "",
         company: "",
         position: "",
+        experience: "",
         appliedDate:""
     })
     const navigate = useNavigate()
@@ -48,6 +49,10 @@ export default function RecordForm() {
                         <Form.Group className='mb-3'>
                             <Form.Label>Position</Form.Label>
                             <Form.Control type='text' onChange={(e) => setForm({...form, position: e.target.value})}/>
+                        </Form.Group>
+                        <Form.Group className='mb-3'>
+                            <Form.Label>Experience</Form.Label>
+                            <Form.Control type='text' onChange={(e) => setForm({...form, experience: e.target.value})}/>
                         </Form.Group>
                         <Form.Group className='mb-3'>
                             <Form.Label>Applied Date</Form.Label>
