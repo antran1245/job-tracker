@@ -1,5 +1,13 @@
 #amount {
-    p {
-        display: inline-block;
+    .status{
+        text-align: center;
+        p {
+            font-size: x-large;
+            width: max-content;
+        }
+        p:nth-child(1) {
+            font-size: xxx-large;
+        }
     }
+
 }
