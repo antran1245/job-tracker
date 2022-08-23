@@ -1,14 +1,18 @@
-#amount {
-    .status{
-        text-align: center;
-        p {
-            font-size: x-large;
-            width: max-content;
-        }
-        p:nth-child(1) {
-            font-size: xxx-large;
-            margin-bottom: 0;
-        }
+.status{
+    text-align: center;
+    p {
+        font-size: x-large;
+        width: max-content;
     }
-
+    p:nth-child(1) {
+        font-size: xxx-large;
+        margin-bottom: 0;
+    }
+}
+.table-row {
+    text-align: center;
+    vertical-align: middle;
+    button {
+        border-radius: 50%;
+    }
 }
