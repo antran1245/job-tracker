@@ -1,6 +1,10 @@
 import {Row, Col, Table, Button} from 'react-bootstrap';
+import axios from 'axios';
 
 export default function RecordTable({listing}) {
+    const changeStatus = (status) => {
+        console.log(status)
+    }
     return(
         <Row>
             <Col>
@@ -27,8 +31,13 @@ export default function RecordTable({listing}) {
                                 <td>{item.experience}</td>
                                 <td>{date}</td>
                                 <td>
-                                    {item.status}
-                                    &#10240;<Button className='btn btn-primary'>&#x22EF;</Button>
+                                    <div className='dropdown'>
+                                        <Button className='btn btn-primary'>{item.status}</Button>
+                                        <div className='dropdown-content'>
+                                            <p onClick={() => changeStatus("interview")}>Interview</p>
+                                            <p onClick={() => changeStatus("denied")}>Rejected</p>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>);
                         })}

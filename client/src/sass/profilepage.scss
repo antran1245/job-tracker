@@ -12,7 +12,26 @@
 .table-row {
     text-align: center;
     vertical-align: middle;
-    button {
-        border-radius: 50%;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 0 10px black;
+    p {
+        padding: 10px 20px;
+        margin: 0;
+        cursor: pointer;
     }
+    P:hover {
+        background-color: rgb(155, 153, 153);
+        color: white;
+    }
+}
+.dropdown:hover .dropdown-content {
+    display: block;
 }
