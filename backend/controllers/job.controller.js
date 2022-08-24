@@ -35,3 +35,13 @@ module.exports.findRecord = (req, res) => {
     .then(resp => res.json(resp))
     .catch(err => res.json(err))
 }
+
+module.exports.updateStatus = (req, res) => {
+    const { _id, status } = req.body
+    Job.findOneAndUpdate(
+        {_id:_id},
+        {status: status},
+        {new:true})
+    .then(resp => res.json(resp))
+    .catch(err => res.json(err))
+}

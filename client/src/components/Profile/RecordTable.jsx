@@ -1,14 +1,29 @@
 import {Row, Col, Table, Button} from 'react-bootstrap';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function RecordTable({listing}) {
-    const changeStatus = (status) => {
-        console.log(status)
+    const [entry, setEntry] = useState([])
+
+    useEffect(() => {
+        setEntry(listing)
+    }, [listing])
+
+    const changeStatus = (id, status, index) => {
+        console.log(id, status)
+        axios.patch("http://localhost:8000/api/job/status", {_id:id, status: status}, {"withCredentials": true})
+        .then(resp => {
+            let newEntry = [...entry]
+            newEntry[index] = resp.data
+            setEntry(newEntry)
+            console.log(resp)})
+        .catch(err => console.log(err))
+
     }
     return(
-        <Row>
+        <Row style={{overflowY: 'visible'}}>
             <Col>
-                <Table striped bordered hover>
+                <Table striped bordered hover responsive>
                     <thead>
                         <tr>
                             <th>#</th>
@@ -21,7 +36,7 @@ export default function RecordTable({listing}) {
                         </tr>
                     </thead>
                     <tbody>
-                        {listing.map((item, index) => {
+                        {entry.map((item, index) => {
                             const date = new Date(item.appliedDate).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
                             return (<tr key={index} className="table-row">
                                 <td>{index+1}</td>
@@ -34,8 +49,8 @@ export default function RecordTable({listing}) {
                                     <div className='dropdown'>
                                         <Button className='btn btn-primary'>{item.status}</Button>
                                         <div className='dropdown-content'>
-                                            <p onClick={() => changeStatus("interview")}>Interview</p>
-                                            <p onClick={() => changeStatus("denied")}>Rejected</p>
+                                            <p onClick={() => changeStatus(item._id, "interview", index)}>Interview</p>
+                                            <p onClick={() => changeStatus(item._id, "rejected", index)}>Rejected</p>
                                         </div>
                                     </div>
                                 </td>

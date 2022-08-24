@@ -9,6 +9,9 @@
         margin-bottom: 0;
     }
 }
+.table-responsive {
+    overflow: visible !important;
+}
 .table-row {
     text-align: center;
     vertical-align: middle;
@@ -34,4 +37,14 @@
 }
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+//phone small and large
+@media only screen and (max-width: 767px) {
+    .table-responsive {
+        overflow: auto !important;
+    }
+    .dropdown-content {
+        position: static;
+    }
 }
