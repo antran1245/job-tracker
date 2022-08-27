@@ -23,12 +23,6 @@ const JobSchema = new mongoose.Schema({
         type: String,
         default: "applied",
         enum: ['applied', 'interview', 'rejected']
-    },
-    interviewNote: {
-        type: String
-    },
-    note: {
-        type: String
     }
 }, {timestamps: true})
 

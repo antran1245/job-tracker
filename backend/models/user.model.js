@@ -27,6 +27,12 @@ const UserSchema = new mongoose.Schema({
             ref: "Jobs"
         }
     ]
+    notes: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Notes"
+        }
+    ]
 }, {timestamps: true})
 
 UserSchema.pre('save', function(next) {
