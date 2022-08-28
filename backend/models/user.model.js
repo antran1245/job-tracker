@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Jobs"
         }
-    ]
+    ],
     notes: [
         {
             type: mongoose.Schema.Types.ObjectId,

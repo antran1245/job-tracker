@@ -9,7 +9,7 @@ module.exports.createNote = (req, res) => {
 
 module.exports.findNote = (req, res) => {
     const {_id, _jobId} = req.params
-    User.findOne({{_id: _id}})
+    User.findOne({_id: _id})
     .then(resp => console.log(resp))
     .catch(err => console.log(err))
 }
