@@ -19,8 +19,8 @@ module.exports.createNote = async(req, res) => {
 }
 
 module.exports.findNote = (req, res) => {
-    const {userId, jobId} = req.params
+    const {_userId, _jobId} = req.params
     Note.findOne({jobId: jobId, userId: userId})
-    .then(resp => console.log(resp))
-    .catch(err => console.log(err))
+    .then(resp => res.json(resp))
+    .catch(err => res.json(err))
 }
