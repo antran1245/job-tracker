@@ -1,16 +1,16 @@
 import {Row, Col, Table, Button} from 'react-bootstrap';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function RecordTable({listing}) {
     const [entry, setEntry] = useState([])
-
+    const navigate = useNavigate()
     useEffect(() => {
         setEntry(listing)
     }, [listing])
 
     const changeStatus = (id, status, index) => {
-        console.log(id, status)
         axios.patch("http://localhost:8000/api/job/status", {_id:id, status: status}, {"withCredentials": true})
         .then(resp => {
             let newEntry = [...entry]
@@ -19,6 +19,10 @@ export default function RecordTable({listing}) {
             console.log(resp)})
         .catch(err => console.log(err))
 
+    }
+
+    const viewDetail = (job, index) => {
+        navigate('/detail', {state: {detail: job, index:index}})
     }
     return(
         <Row style={{overflowY: 'visible'}}>
@@ -38,7 +42,7 @@ export default function RecordTable({listing}) {
                     <tbody>
                         {entry.map((item, index) => {
                             const date = new Date(item.appliedDate).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
-                            return (<tr key={index} className="table-row">
+                            return (<tr key={index} className="table-row" onClick={() => viewDetail(item, index)}>
                                 <td>{index+1}</td>
                                 <td>{item.jobTitle}</td>
                                 <td>{item.company}</td>
