@@ -47,6 +47,16 @@ export default function DetailRecord() {
                     <li>Applied Date: {jobDetail.appliedDate}</li>
                 </ul>
             </Row>
+            <Row>
+                <Col>
+                    <h3>Interview Notes</h3>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <h3>Note</h3>
+                </Col>
+            </Row>
         </Container>
     );
 }
