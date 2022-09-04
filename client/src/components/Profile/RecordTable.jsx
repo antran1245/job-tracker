@@ -1,28 +1,32 @@
 import {Row, Col, Table, Button} from 'react-bootstrap';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { UserContext } from '../../context/UserContext';
 
 export default function RecordTable({listing}) {
     const [entry, setEntry] = useState([])
+    const {user} =  useContext(UserContext)
     const navigate = useNavigate()
     useEffect(() => {
         setEntry(listing)
     }, [listing])
 
     const changeStatus = (id, status, index) => {
-        axios.patch("http://localhost:8000/api/job/status", {_id:id, status: status}, {"withCredentials": true})
+        axios.patch("http://localhost:8000/api/job/status", {userId:  user._id, _id: id, status: status}, {"withCredentials": true})
         .then(resp => {
-            let newEntry = [...entry]
-            newEntry[index] = resp.data
+            let newEntry = resp.data.jobs
             setEntry(newEntry)
+            console.log(resp)
             })
         .catch(err => console.log(err))
 
     }
 
-    const viewDetail = (job, index) => {
-        navigate('/detail', {state: {detail: job, index:index}})
+    const viewDetail = (e, job, index) => {
+        if (e.target.localName === "td") {
+            navigate('/detail', {state: {detail: job, index:index}})
+        }
     }
     return(
         <Row style={{overflowY: 'visible'}}>
@@ -42,7 +46,7 @@ export default function RecordTable({listing}) {
                     <tbody>
                         {entry.map((item, index) => {
                             const date = new Date(item.appliedDate).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
-                            return (<tr key={index} className="table-row" onClick={() => viewDetail(item, index)}>
+                            return (<tr key={index} className="table-row" onClick={(e) => viewDetail(e,item, index)}>
                                 <td>{index+1}</td>
                                 <td>{item.jobTitle}</td>
                                 <td>{item.company}</td>

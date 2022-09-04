@@ -1,3 +1,4 @@
+const mongoose = require('mongoose')
 const Job = require('../models/job.model');
 const User = require('../models/user.model');
 
@@ -37,11 +38,19 @@ module.exports.findRecord = (req, res) => {
 }
 
 module.exports.updateStatus = (req, res) => {
-    const { _id, status } = req.body
-    Job.findOneAndUpdate(
-        {_id:_id},
-        {status: status},
-        {new:true})
-    .then(resp => res.json(resp))
+    const { userId, _id, status } = req.body
+    User.findOneAndUpdate(
+        {_id: userId, "jobs._id": new mongoose.mongo.ObjectId(_id)},
+        {"$set": {
+            "jobs.$.status": status
+        }},
+        {new: true})
+    .then(resp => {
+        res.json(resp)
+    })
     .catch(err => res.json(err))
+    
+        // {_id:_id},
+        // {status: status},
+        // {new:true})
 }
