@@ -16,7 +16,7 @@ export default function RecordTable({listing}) {
             let newEntry = [...entry]
             newEntry[index] = resp.data
             setEntry(newEntry)
-            console.log(resp)})
+            })
         .catch(err => console.log(err))
 
     }

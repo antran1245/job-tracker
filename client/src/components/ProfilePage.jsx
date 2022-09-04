@@ -17,12 +17,10 @@ useEffect(() => {
     if(user._id !== "") {
         axios.get(`http://localhost:8000/api/jobs/${user._id}`, {"withCredentials": true})
         .then(resp => {
-            // console.log(resp.data)
             setListing(resp.data.jobs)
             const applied = resp.data.jobs.filter(item => item.status === "applied")
             const interview = resp.data.jobs.filter(item => item.status === "interview")
             const rejected = resp.data.jobs.filter(item => item.status === "rejected")
-            // console.log(applied)
             setStatus({"applied": applied, "interview": interview, "rejected": rejected})
         })
         .catch(err => console.log(err))

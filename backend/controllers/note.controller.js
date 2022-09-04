@@ -8,7 +8,7 @@ module.exports.createNote = async(req, res) => {
         Note.findOneAndUpdate(
             {jobId: jobId},
             {$push: {interviewNote: interviewNote, note: note}},
-            new: true)
+            {new: true})
         .then(resp => res.json(resp))
         .catch(err => res.json(err))
     } else {
@@ -20,7 +20,7 @@ module.exports.createNote = async(req, res) => {
 
 module.exports.findNote = (req, res) => {
     const {_userId, _jobId} = req.params
-    Note.findOne({jobId: jobId, userId: userId})
+    Note.findOne({jobId: _jobId, userId: _userId})
     .then(resp => res.json(resp))
     .catch(err => res.json(err))
 }

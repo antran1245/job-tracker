@@ -10,7 +10,7 @@ module.exports.createRecord = (req, res) => {
                 req.params._id,
                 {
                     $push: {
-                        jobs: resp._id
+                        jobs: resp
                     }
                 },
                 {new: true, useFindAndModify: false})

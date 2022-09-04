@@ -21,12 +21,7 @@ const UserSchema = new mongoose.Schema({
             message: "Please enter a valid email"
         }
     },
-    jobs: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Jobs"
-        }
-    ],
+    jobs: [{}],
     notes: [
         {
             type: mongoose.Schema.Types.ObjectId,
