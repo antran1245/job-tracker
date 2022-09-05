@@ -57,8 +57,9 @@ export default function RecordTable({listing}) {
                                     <div className='dropdown'>
                                         <Button className='btn btn-primary'>{item.status}</Button>
                                         <div className='dropdown-content'>
-                                            <p onClick={() => changeStatus(item._id, "interview", index)}>Interview</p>
-                                            <p onClick={() => changeStatus(item._id, "rejected", index)}>Rejected</p>
+                                            {item.status !== 'applied' && <p onClick={() => changeStatus(item._id, "applied", index)}>Applied</p>}
+                                            {item.status !== 'interview' && <p onClick={() => changeStatus(item._id, "interview", index)}>Interview</p>}
+                                            {item.status !== 'rejected' && <p onClick={() => changeStatus(item._id, "rejected", index)}>Rejected</p>}
                                         </div>
                                     </div>
                                 </td>
