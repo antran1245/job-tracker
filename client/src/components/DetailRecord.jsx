@@ -1,7 +1,6 @@
-import { useEffect, useState, useContext } from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Col, Container, Row, Form, Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
 import axios from 'axios';
 
 export default function DetailRecord() {
@@ -14,23 +13,35 @@ export default function DetailRecord() {
         status: String | null,
         index: String | null
     })
+    const [form, setForm] = useState({userId: "", jobId: "", interviewNote: ["another"], note: []})
     const [interviewNote, setInterviewNote] = useState([])
     const [note, setNote] = useState([])
-    const {user} = useContext(UserContext)
     const {state} = useLocation()
-    const {detail, index} = state
+    const {detail, index, userId} = state
 
     useEffect(() => {
         setJobDetail({...detail, index: index})
-        const userId = user._id
         const jobId = detail._id
+        setForm({...form, userId: userId, jobId: jobId})
         axios.get(`http://localhost:8000/api/note/${userId}/${jobId}`)
         .then(resp => console.log(resp))
         .catch(err => console.log(err))
-        console.log(detail, index)
     }, [])
+
+    const submitInterviewNote = (e) => {
+        e.preventDefault()
+        console.log('interview note')
+        axios.post('http://localhost:8000/api/note', form)
+        .then(resp => console.log(resp))
+        .catch(err => console.log(err))
+    }
+
+    const submitNote = (e) => {
+        e.preventDefault()
+        console.log('note')
+    }
     return(
-        <Container>
+        <Container id="detailRecord">
             <Row>
                 <Col>
                     <h1>#{jobDetail.index} {jobDetail.jobTitle}</h1>
@@ -53,9 +64,37 @@ export default function DetailRecord() {
                 </Col>
             </Row>
             <Row>
+                <Form onSubmit={submitInterviewNote}>
+                    <Form.Group as={Row} className="mb-3">
+                        <Col xs="12" sm="12">
+                            <Form.Control as="textarea" rows={2} />
+                        </Col>
+                    </Form.Group>
+                    <Row className="justify-content-end">
+                        <Col xs="12" sm="3">
+                            <Button className="btn btn-primary w-100" type="submit">Add</Button>
+                        </Col>
+                    </Row>
+                </Form>
+            </Row>
+            <Row>
                 <Col>
                     <h3>Note</h3>
                 </Col>
+            </Row>
+            <Row>
+                <Form onSubmit={submitNote}>
+                    <Form.Group as={Row} className="mb-3">
+                        <Col xs="12" sm="12">
+                            <Form.Control as="textarea" rows={2} />
+                        </Col>
+                    </Form.Group>
+                    <Row className="justify-content-end">
+                        <Col xs="12" sm="3">
+                            <Button className="btn btn-primary w-100" type="submit">Add</Button>
+                        </Col>
+                    </Row>
+                </Form>
             </Row>
         </Container>
     );

@@ -7,9 +7,9 @@ import LoginRegister from "./LoginRegister";
 import Navigation from "./Navigation";
 import Home from "./Home";
 import RecordForm from "./RecordForm";
-import "../sass/main.scss";
 import ProfilePage from "./ProfilePage";
 import DetailRecord from "./DetailRecord";
+import "../sass/main.scss";
 
 export default function Main() {
     let [user, setUser] = useState({_id: "", name: ""})

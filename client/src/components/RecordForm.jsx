@@ -26,7 +26,7 @@ export default function RecordForm() {
         .catch(err => console.log(err))
     }
     return(
-        <Container>
+        <Container id="record">
             <Row className='mt-3'>
                 <Col xs={{span: 12, order: 'last'}} md={{span:6, order: 'first'}}>
                     <Form className='p-4' onSubmit={handleSubmit}>

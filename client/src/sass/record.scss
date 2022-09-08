@@ -1,12 +1,14 @@
-form {
-    background-color: #394867;
-    padding: 15px 10px;
-    color: white;
-    border-radius: 10px;
-    box-shadow: 0px 0px 12px black, inset 0 0 4px black;
-    .row {
-        display: flex;
-        align-items: flex-end;
+#record {
+    form {
+        background-color: #394867;
+        padding: 15px 10px;
+        color: white;
+        border-radius: 10px;
+        box-shadow: 0px 0px 12px black, inset 0 0 4px black;
+        .row {
+            display: flex;
+            align-items: flex-end;
+        }
     }
 }
 

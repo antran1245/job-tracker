@@ -6,7 +6,7 @@ module.exports.createNote = async(req, res) => {
     const exist = await Note.exists({jobId: jobId, userId: userId})
     if (exist) {
         Note.findOneAndUpdate(
-            {jobId: jobId},
+            {jobId: jobId, userId: userId},
             {$push: {interviewNote: interviewNote, note: note}},
             {new: true})
         .then(resp => res.json(resp))

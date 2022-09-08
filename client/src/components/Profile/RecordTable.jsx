@@ -25,7 +25,7 @@ export default function RecordTable({listing}) {
 
     const viewDetail = (e, job, index) => {
         if (e.target.localName === "td") {
-            navigate('/detail', {state: {detail: job, index:index}})
+            navigate('/detail', {state: {detail: job, index:index, userId: user._id}})
         }
     }
     return(
