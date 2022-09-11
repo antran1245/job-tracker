@@ -13,7 +13,7 @@ export default function DetailRecord() {
         status: String | null,
         index: String | null
     })
-    const [form, setForm] = useState({userId: "", jobId: "", interviewNote: ["another"], note: []})
+    const [form, setForm] = useState({userId: "", jobId: "", interviewNote: "", note: ""})
     const [interviewNote, setInterviewNote] = useState([])
     const [note, setNote] = useState([])
     const {state} = useLocation()
@@ -67,7 +67,7 @@ export default function DetailRecord() {
                 <Form onSubmit={submitInterviewNote}>
                     <Form.Group as={Row} className="mb-3">
                         <Col xs="12" sm="12">
-                            <Form.Control as="textarea" rows={2} />
+                            <Form.Control as="textarea" rows={2} onChange={(e) => setForm({...form, interviewNote: e.target.value})}/>
                         </Col>
                     </Form.Group>
                     <Row className="justify-content-end">
@@ -86,7 +86,7 @@ export default function DetailRecord() {
                 <Form onSubmit={submitNote}>
                     <Form.Group as={Row} className="mb-3">
                         <Col xs="12" sm="12">
-                            <Form.Control as="textarea" rows={2} />
+                            <Form.Control as="textarea" rows={2}  onChange={(e) => setForm({...form, note: e.target.value})}/>
                         </Col>
                     </Form.Group>
                     <Row className="justify-content-end">
