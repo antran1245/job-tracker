@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../../context/UserContext';
 
-export default function RecordTable({listing}) {
+export default function RecordTable({listing, currStatus, setStatus}) {
     const [entry, setEntry] = useState([])
     const {user} =  useContext(UserContext)
     const navigate = useNavigate()
@@ -12,12 +12,16 @@ export default function RecordTable({listing}) {
         setEntry(listing)
     }, [listing])
 
-    const changeStatus = (id, status, index) => {
+    const changeStatus = (id, status, prevStatus, index) => {
+        let ind = currStatus[prevStatus].findIndex((item) => item._id === id)
         axios.patch("http://localhost:8000/api/job/status", {userId:  user._id, _id: id, status: status}, {"withCredentials": true})
         .then(resp => {
             let newEntry = resp.data.jobs
             setEntry(newEntry)
-            console.log(resp)
+            currStatus[prevStatus].splice(ind, 1)
+            const updateStatus =  resp.data.jobs.filter(item => item._id === id)
+            setStatus({...currStatus, [status]: [...currStatus[status], ...updateStatus]})
+            // console.log(resp)
             })
         .catch(err => console.log(err))
 
@@ -46,7 +50,7 @@ export default function RecordTable({listing}) {
                     <tbody>
                         {entry.map((item, index) => {
                             const date = new Date(item.appliedDate).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"}) 
-                            return (<tr key={index} className="table-row" onClick={(e) => viewDetail(e,item, index)}>
+                            return (<tr key={index} className="table-row" onClick={(e) => viewDetail(e, item, index)}>
                                 <td>{index+1}</td>
                                 <td>{item.jobTitle}</td>
                                 <td>{item.company}</td>
@@ -57,9 +61,9 @@ export default function RecordTable({listing}) {
                                     <div className='dropdown'>
                                         <Button className='btn btn-primary'>{item.status}</Button>
                                         <div className='dropdown-content'>
-                                            {item.status !== 'applied' && <p onClick={() => changeStatus(item._id, "applied", index)}>Applied</p>}
-                                            {item.status !== 'interview' && <p onClick={() => changeStatus(item._id, "interview", index)}>Interview</p>}
-                                            {item.status !== 'rejected' && <p onClick={() => changeStatus(item._id, "rejected", index)}>Rejected</p>}
+                                            {item.status !== 'applied' && <p onClick={() => changeStatus(item._id, "applied", item.status, index)}>Applied</p>}
+                                            {item.status !== 'interview' && <p onClick={() => changeStatus(item._id, "interview", item.status, index)}>Interview</p>}
+                                            {item.status !== 'rejected' && <p onClick={() => changeStatus(item._id, "rejected", item.status, index)}>Rejected</p>}
                                         </div>
                                     </div>
                                 </td>

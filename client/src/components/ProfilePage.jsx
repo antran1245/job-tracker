@@ -22,10 +22,12 @@ useEffect(() => {
             const interview = resp.data.jobs.filter(item => item.status === "interview")
             const rejected = resp.data.jobs.filter(item => item.status === "rejected")
             setStatus({"applied": applied, "interview": interview, "rejected": rejected})
+            console.log(resp.data.jobs)
         })
         .catch(err => console.log(err))
     }
 }, [user])
+
     return(
         <Container>
             <Row>
@@ -48,7 +50,7 @@ useEffect(() => {
                     <Button className="btn btn-primary" onClick={() => navigate('/record')}>&#43; Another Job</Button>
                 </Col>
             </Row>
-            <RecordTable listing={listing}/>
+            <RecordTable listing={listing} currStatus={status} setStatus={setStatus}/>
         </Container>
     );
 }

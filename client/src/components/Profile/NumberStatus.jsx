@@ -2,6 +2,7 @@ import { Col, Row } from "react-bootstrap";
 import "../../sass/profilepage.scss";
 
 export default function NumberStatus({status}) {
+    console.log(status)
     return(
         <Row className="justify-content-center">
             <Col xs={4} sm={2} className='status'>
