@@ -22,7 +22,6 @@ useEffect(() => {
             const interview = resp.data.jobs.filter(item => item.status === "interview")
             const rejected = resp.data.jobs.filter(item => item.status === "rejected")
             setStatus({"applied": applied, "interview": interview, "rejected": rejected})
-            console.log(resp.data.jobs)
         })
         .catch(err => console.log(err))
     }

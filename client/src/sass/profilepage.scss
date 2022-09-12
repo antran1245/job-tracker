@@ -19,6 +19,9 @@
 .dropdown {
     position: relative;
     display: inline-block;
+    button {
+        width: 100px !important;
+    }
 }
 .dropdown-content {
     display: none;

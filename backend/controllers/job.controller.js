@@ -49,8 +49,4 @@ module.exports.updateStatus = (req, res) => {
         res.json(resp)
     })
     .catch(err => res.json(err))
-    
-        // {_id:_id},
-        // {status: status},
-        // {new:true})
 }
