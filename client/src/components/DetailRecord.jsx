@@ -34,7 +34,7 @@ export default function DetailRecord() {
     const submitInterviewNote = (e) => {
         e.preventDefault()
         console.log('interview note')
-        axios.post('http://localhost:8000/api/note', form)
+        axios.post('http://localhost:8000/api/interviewNote', form)
         .then(resp => console.log(resp))
         .catch(err => console.log(err))
     }
@@ -42,6 +42,9 @@ export default function DetailRecord() {
     const submitNote = (e) => {
         e.preventDefault()
         console.log('note')
+        axios.post('http://localhost:8000/api/note', form)
+        .then(resp => console.log(resp))
+        .catch(err => console.log(err))
     }
     return(
         <Container id="detailRecord">
@@ -82,6 +85,15 @@ export default function DetailRecord() {
             </Row>
             <Row>
                 <Col>
+                    <ul>
+                        {interviewNote.map((item, index) => {
+                            return <li key={index}>{item}</li>
+                        })}
+                    </ul>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
                     <h3>Note</h3>
                 </Col>
             </Row>
@@ -98,6 +110,15 @@ export default function DetailRecord() {
                         </Col>
                     </Row>
                 </Form>
+            </Row>
+            <Row>
+                <Col>
+                    <ul>
+                        {note.map((item, index) => {
+                            return <li key={index}>{item}</li>
+                        })}
+                    </ul>
+                </Col>
             </Row>
         </Container>
     );
