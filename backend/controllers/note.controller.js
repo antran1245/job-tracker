@@ -21,6 +21,6 @@ module.exports.createNote = async(req, res) => {
 module.exports.findNote = (req, res) => {
     const {_userId, _jobId} = req.params
     Note.findOne({jobId: _jobId, userId: _userId})
-    .then(resp => res.json(resp))
+    .then(resp => res.json({interviewNote: resp.interviewNote, note: resp.note}))
     .catch(err => res.json(err))
 }

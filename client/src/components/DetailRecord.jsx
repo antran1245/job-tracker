@@ -24,7 +24,10 @@ export default function DetailRecord() {
         const jobId = detail._id
         setForm({...form, userId: userId, jobId: jobId})
         axios.get(`http://localhost:8000/api/note/${userId}/${jobId}`)
-        .then(resp => console.log(resp))
+        .then(resp => {
+            setInterviewNote(resp.data.interviewNote)
+            setNote(resp.data.note)
+            console.log(resp)})
         .catch(err => console.log(err))
     }, [])
 
