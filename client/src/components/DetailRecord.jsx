@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Row, Form, Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
+import ChangeStatus from "./Profile/ChangeStatus";
 import axios from 'axios';
+import '../sass/detailRecord.scss';
 
 export default function DetailRecord() {
     const [jobDetail, setJobDetail] = useState({
@@ -27,13 +29,15 @@ export default function DetailRecord() {
         .then(resp => {
             setInterviewNote(resp.data.interviewNote)
             setNote(resp.data.note)
-            console.log(resp)})
+        })
         .catch(err => console.log(err))
     }, [])
 
+    const changeStatus = (id, status, prevStatus, index) => {
+        console.log(id, status, prevStatus, index)
+    }
     const submitInterviewNote = (e) => {
         e.preventDefault()
-        console.log('interview note')
         axios.post('http://localhost:8000/api/interviewNote', form)
         .then(resp => console.log(resp))
         .catch(err => console.log(err))
@@ -41,27 +45,26 @@ export default function DetailRecord() {
 
     const submitNote = (e) => {
         e.preventDefault()
-        console.log('note')
         axios.post('http://localhost:8000/api/note', form)
         .then(resp => console.log(resp))
         .catch(err => console.log(err))
     }
     return(
         <Container id="detailRecord">
-            <Row>
+            <Row className="d-flex align-items-center">
                 <Col>
-                    <h1>#{jobDetail.index} {jobDetail.jobTitle}</h1>
+                    <h1><b>#{jobDetail.index} {jobDetail.jobTitle}</b></h1>
                 </Col>
-                <Col>
-                    <button>{jobDetail.status}</button>
+                <Col className="d-flex justify-content-end">
+                    <ChangeStatus item={detail} index={index} changeStatus={changeStatus}/>
                 </Col>
             </Row>
             <Row>
                 <ul>
-                    <li>Company: {jobDetail.company}</li>
-                    <li>Position: {jobDetail.position}</li>
-                    <li>Experience: {jobDetail.experience}</li>
-                    <li>Applied Date: {jobDetail.appliedDate}</li>
+                    <li><h4><span>Company:</span> {jobDetail.company}</h4></li>
+                    <li><h4><span>Position:</span> {jobDetail.position}</h4></li>
+                    <li><h4><span>Experience:</span> {jobDetail.experience}</h4></li>
+                    <li><h4><span>Applied Date:</span> {(new Date(jobDetail.appliedDate)).toLocaleDateString('en-US',{weekday: 'long', year:  'numeric', month: 'long', day: 'numeric'})}</h4></li>
                 </ul>
             </Row>
             <Row>
@@ -70,17 +73,15 @@ export default function DetailRecord() {
                 </Col>
             </Row>
             <Row>
-                <Form onSubmit={submitInterviewNote}>
-                    <Form.Group as={Row} className="mb-3">
-                        <Col xs="12" sm="12">
+                <Form onSubmit={submitInterviewNote} className="noteForm">
+                    <Form.Group as={Row} className="mb-0">
+                        <Col xs="12" sm="10">
                             <Form.Control as="textarea" rows={2} onChange={(e) => setForm({...form, interviewNote: e.target.value})}/>
                         </Col>
-                    </Form.Group>
-                    <Row className="justify-content-end">
-                        <Col xs="12" sm="3">
-                            <Button className="btn btn-primary w-100" type="submit">Add</Button>
+                        <Col xs="12" sm="2" className="mt-3 mt-sm-0">
+                            <Button className="btn btn-primary w-100 h-100" type="submit"><b>Add</b></Button>
                         </Col>
-                    </Row>
+                    </Form.Group>
                 </Form>
             </Row>
             <Row>
@@ -98,17 +99,15 @@ export default function DetailRecord() {
                 </Col>
             </Row>
             <Row>
-                <Form onSubmit={submitNote}>
-                    <Form.Group as={Row} className="mb-3">
-                        <Col xs="12" sm="12">
+                <Form onSubmit={submitNote} className="noteForm">
+                    <Form.Group as={Row} className="mb-0">
+                        <Col xs="12" sm="10">
                             <Form.Control as="textarea" rows={2}  onChange={(e) => setForm({...form, note: e.target.value})}/>
                         </Col>
-                    </Form.Group>
-                    <Row className="justify-content-end">
-                        <Col xs="12" sm="3">
-                            <Button className="btn btn-primary w-100" type="submit">Add</Button>
+                        <Col xs="12" sm="2" className="mt-3 mt-sm-0">
+                            <Button className="btn btn-primary w-100 h-100" type="submit"><b>Add</b></Button>
                         </Col>
-                    </Row>
+                    </Form.Group>
                 </Form>
             </Row>
             <Row>

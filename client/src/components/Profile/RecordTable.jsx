@@ -1,8 +1,9 @@
-import {Row, Col, Table, Button} from 'react-bootstrap';
+import {Row, Col, Table} from 'react-bootstrap';
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { UserContext } from '../../context/UserContext';
+import axios from 'axios';
+import ChangeStatus from './ChangeStatus';
 
 export default function RecordTable({listing, currStatus, setStatus}) {
     const [entry, setEntry] = useState([])
@@ -24,7 +25,6 @@ export default function RecordTable({listing, currStatus, setStatus}) {
             // console.log(resp)
             })
         .catch(err => console.log(err))
-
     }
 
     const viewDetail = (e, job, index) => {
@@ -58,14 +58,7 @@ export default function RecordTable({listing, currStatus, setStatus}) {
                                 <td>{item.experience}</td>
                                 <td>{date}</td>
                                 <td>
-                                    <div className='dropdown'>
-                                        <Button className='btn btn-primary'>{item.status}</Button>
-                                        <div className='dropdown-content'>
-                                            {item.status !== 'applied' && <p onClick={() => changeStatus(item._id, "applied", item.status, index)}>Applied</p>}
-                                            {item.status !== 'interview' && <p onClick={() => changeStatus(item._id, "interview", item.status, index)}>Interview</p>}
-                                            {item.status !== 'rejected' && <p onClick={() => changeStatus(item._id, "rejected", item.status, index)}>Rejected</p>}
-                                        </div>
-                                    </div>
+                                    <ChangeStatus item={item} index={index} changeStatus={changeStatus}/>
                                 </td>
                             </tr>);
                         })}

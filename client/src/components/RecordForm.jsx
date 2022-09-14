@@ -13,7 +13,7 @@ export default function RecordForm() {
         company: "",
         position: "",
         experience: "",
-        appliedDate:""
+        appliedDate: (new Date()).toISOString().substring(0,10)
     })
     const navigate = useNavigate()
     const handleSubmit =  (e) => {
@@ -31,11 +31,11 @@ export default function RecordForm() {
                 <Col xs={{span: 12, order: 'last'}} md={{span:6, order: 'first'}}>
                     <Form className='p-4' onSubmit={handleSubmit}>
                         <Row>
-                            <Col>
+                            <Col xs={3}>
                                 <Paper size={100}/>
                             </Col>
                             <Col>
-                                <h2>Input Job Detail</h2>
+                                <h2><b>Input The Job Detail</b></h2>
                             </Col>
                         </Row>
                         <Form.Group className='mb-3'>
@@ -56,7 +56,7 @@ export default function RecordForm() {
                         </Form.Group>
                         <Form.Group className='mb-3'>
                             <Form.Label>Applied Date</Form.Label>
-                            <Form.Control type="date" onChange={(e) => setForm({...form, appliedDate: e.target.value})}/>
+                            <Form.Control type="date" onChange={(e) => setForm({...form, appliedDate: e.target.value})} value={form.appliedDate}/>
                         </Form.Group>
                         <Button variant='primary' className='w-100' type='submit'>Submit</Button>
                     </Form>
