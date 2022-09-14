@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Col, Container, Row, Form, Button } from "react-bootstrap";
+import { Col, Container, Row, Form, Button, Table } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import ChangeStatus from "./Profile/ChangeStatus";
 import axios from 'axios';
@@ -46,7 +46,8 @@ export default function DetailRecord() {
         axios.post('http://localhost:8000/api/interviewNote', form)
         .then(resp => {
             setInterviewNote(resp.data)
-            console.log(resp)})
+            console.log(resp.data)
+        })
         .catch(err => console.log(err))
     }
 
@@ -55,7 +56,7 @@ export default function DetailRecord() {
         axios.post('http://localhost:8000/api/note', form)
         .then(resp => {
             setNote(resp.data)
-            console.log(resp)})
+        })
         .catch(err => console.log(err))
     }
     return(
@@ -95,11 +96,22 @@ export default function DetailRecord() {
             </Row>
             <Row>
                 <Col>
-                    <ul>
-                        {interviewNote.map((item, index) => {
-                            return <li key={index}>{item}</li>
-                        })}
-                    </ul>
+                    <Table striped>
+                        <thead>
+                            <tr>
+                                <th width="5%">#</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {interviewNote.map((item, index) => {
+                                return <tr key={index}>
+                                    <td width="5%">{index+1}</td>
+                                    <td>{item}</td>
+                                </tr>
+                            })}
+                        </tbody>
+                    </Table>
                 </Col>
             </Row>
             <Row>
@@ -121,11 +133,22 @@ export default function DetailRecord() {
             </Row>
             <Row>
                 <Col>
-                    <ul>
-                        {note.map((item, index) => {
-                            return <li key={index}>{item}</li>
-                        })}
-                    </ul>
+                    <Table striped>
+                        <thead>
+                            <tr>
+                                <th width="5%">#</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {note.map((item, index) => {
+                                return <tr key={index}>
+                                    <td width="5%">{index+1}</td>
+                                    <td>{item}</td>
+                                </tr>
+                            })}
+                        </tbody>
+                    </Table>
                 </Col>
             </Row>
         </Container>

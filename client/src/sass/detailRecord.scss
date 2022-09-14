@@ -10,4 +10,10 @@
         padding: 10px;
         border-radius: 10px;
     }
+    tbody {
+        border-top: 1px solid black;
+        tr {
+            border: transparent;
+        }
+    }
 }
