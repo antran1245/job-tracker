@@ -10,11 +10,11 @@ module.exports.createNote = async(req, res) => {
             {jobId: jobId, userId: userId},
             {$push: {note: note}},
             {new: true})
-        .then(resp => res.json(resp))
+        .then(resp => res.json(resp.note))
         .catch(err => res.json(err))
     } else {
         Note.create(form)
-        .then(resp => res.json(resp))
+        .then(resp => res.json(resp.note))
         .catch(err => res.json(err))
     }
 }
@@ -27,11 +27,11 @@ module.exports.createInterviewNote = async(req, res) => {
             {jobId: jobId, userId: userId},
             {$push: {interviewNote: interviewNote}},
             {new: true})
-        .then(resp => res.json(resp))
+        .then(resp => res.json(resp.interviewNote))
         .catch(err => res.json(err))
     } else {
         Note.create(form)
-        .then(resp => res.json(resp))
+        .then(resp => res.json(resp.interviewNote))
         .catch(err => res.json(err))
     }
 }

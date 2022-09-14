@@ -7,6 +7,7 @@ import '../sass/detailRecord.scss';
 
 export default function DetailRecord() {
     const [jobDetail, setJobDetail] = useState({
+        _id : String | null,
         jobTitle: String | null,
         company: String | null,
         position: String | null,
@@ -23,9 +24,8 @@ export default function DetailRecord() {
 
     useEffect(() => {
         setJobDetail({...detail, index: index})
-        const jobId = detail._id
-        setForm({...form, userId: userId, jobId: jobId})
-        axios.get(`http://localhost:8000/api/note/${userId}/${jobId}`)
+        setForm({...form, userId: userId, jobId: detail._id})
+        axios.get(`http://localhost:8000/api/note/${userId}/${detail._id}`)
         .then(resp => {
             setInterviewNote(resp.data.interviewNote)
             setNote(resp.data.note)
@@ -35,18 +35,27 @@ export default function DetailRecord() {
 
     const changeStatus = (id, status, prevStatus, index) => {
         console.log(id, status, prevStatus, index)
+        axios.patch("http://localhost:8000/api/job/status", {userId: form.userId, _id: form.jobId, state: status}, {"withCredentials": true})
+        .then(() => {
+            setJobDetail({...jobDetail, status: status})
+        })
+        .catch(err => console.log(err))
     }
     const submitInterviewNote = (e) => {
         e.preventDefault()
         axios.post('http://localhost:8000/api/interviewNote', form)
-        .then(resp => console.log(resp))
+        .then(resp => {
+            setInterviewNote(resp.data)
+            console.log(resp)})
         .catch(err => console.log(err))
     }
 
     const submitNote = (e) => {
         e.preventDefault()
         axios.post('http://localhost:8000/api/note', form)
-        .then(resp => console.log(resp))
+        .then(resp => {
+            setNote(resp.data)
+            console.log(resp)})
         .catch(err => console.log(err))
     }
     return(
@@ -56,7 +65,7 @@ export default function DetailRecord() {
                     <h1><b>#{jobDetail.index} {jobDetail.jobTitle}</b></h1>
                 </Col>
                 <Col className="d-flex justify-content-end">
-                    <ChangeStatus item={detail} index={index} changeStatus={changeStatus}/>
+                    <ChangeStatus item={jobDetail} index={index} changeStatus={changeStatus}/>
                 </Col>
             </Row>
             <Row>
